@@ -5,10 +5,13 @@ File clarification:
 
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import cm
-from mpl_toolkits.mplot3d import Axes3D  
+import sys, os, math, scipy.misc, pdb, collections, random, imageio, cv2
+
+from imutils import face_utils
 from PIL import Image
-import sys, pdb, scipy.misc, os.path
+from skimage.feature import corner_harris
+from scipy.ndimage.filters import gaussian_filter
+from numpy.linalg import inv
 
 sys.path.append('../Convolutional_Neural_Networks/')
 
