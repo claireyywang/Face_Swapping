@@ -5,10 +5,10 @@
 function video_loader(file_path,len_frame,size=(H,W))
 ```
 input: 
-	file_path_s: the path of the mp4 file of source
-	file_path_t: the path of the mp4 file of target
-	len_frame: int
-	file_output_path: the path of output videooutput: a list of images
+	file_path_s: the path of the mp4 file of source  
+	file_path_t: the path of the mp4 file of target  
+	len_frame: int  
+	file_output_path: the path of output videooutput: a list of images  
 
 ```
 function feature_detect(img)
