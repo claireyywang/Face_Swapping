@@ -2,7 +2,7 @@
 
 ## Basic skeleton
 ```
-function video_loader(file_path,len_frame,size=(H,W))
+function video_loader(file_path_s, file_path_t ,len_frame,file_output_path)
 ```
 input: 
 	file_path_s: the path of the mp4 file of source  
