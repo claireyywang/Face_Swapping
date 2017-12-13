@@ -52,4 +52,4 @@ output:
 	img: WxHx3, the image after
 NODE: we may use the seamless clone to make it more natural
 
-* output = cv2.seamlessClone(src, dst, mask, center, cv2.NORMAL_CLONE) **
+* output = cv2.seamlessClone(src, dst, mask, center, cv2.NORMAL_CLONE) 
