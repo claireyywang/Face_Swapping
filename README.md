@@ -5,10 +5,18 @@
 function video_loader(file_path,len_frame,size=(H,W))
 ```
 input: 
+<<<<<<< HEAD
 	file_path_s: the path of the mp4 file of source
 	file_path_t: the path of the mp4 file of target
 	len_frame: int
 	file_output_path: the path of output videooutput: a list of images
+=======
+	file_path: the path of the avi file
+	len_frame: int 
+	output_img_size,H,W: int,int
+	
+output: a list of images
+>>>>>>> a29d7450f326ea4027035f66ca0fd904a6c084c6
 
 
 ```
