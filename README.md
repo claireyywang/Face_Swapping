@@ -17,9 +17,9 @@ input:
 	image WxHx3 
 	
 output: 
-	points: an list of face feature * 5 [[x1,y1],[x2,y2],[x3,y3]] 
+	points_in_pic: an list of person's face feature in img each one contains 68 * 2 dimension (total n * 68 * 2)
 	
-NOTE: order of points matters,x1,y1 are coordinate
+NOTE: order of points matters, 0th ~ 26th is the contour of the face 
 
 ```
 function extract_mask(points,(H,W))
