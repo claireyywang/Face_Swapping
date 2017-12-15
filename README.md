@@ -1,5 +1,12 @@
 # Face_Swapping
 
+## Must do
+
+* Install dlib package
+* Download "shape_predictor_68_face_landmarks.dat" file 
+* Create a folder call "dlib" then put the "shape_predictor_68_face_landmarks.dat" file into the folder "dlib"
+
+
 ## Basic skeleton
 ```
 function video_loader(file_path_s, file_path_t ,len_frame,file_output_path)
