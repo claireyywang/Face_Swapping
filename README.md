@@ -29,16 +29,18 @@ output:
 NOTE: order of points matters, 0th ~ 26th is the contour of the face 
 
 ```
-function extract_mask(points,(H,W))
+function extract_mask(points,img)
 ```
 input: 
 	points: list of points
+	img: gray scale image
 	
 output: 
-	mask: an HxW boolean matrics reprenst the mask
+	masks: an list of HxW boolean matrics reprenst the masks
 	
 NOTE:  
 * scipy.spatial.ConvexHull to calculate the boundary
+
 
 ```
 function estimate_homography(points_source,points_target)
@@ -50,7 +52,9 @@ input:
 output: 
 	H: homography matrix represent how to transform image from source to target
 
-NOTE: only use the convex hull point to estimate homography so that we can put the emotion of source image appear on the target body without be influenced
+NOTE: 
+* only use the convex hull point to estimate homography so that we can put the emotion of source image appear on the target body without be influenced
+* Using cv2.findHomography to find homography matrix
 
 ```
 function blending(img_source, img_target,mask,H)

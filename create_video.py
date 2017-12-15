@@ -24,13 +24,17 @@ def create_video(file_path_s, file_path_t ,len_frame,file_output_path):
 		img_t_gray = cv2.cvtColor(img_t, cv2.COLOR_BGR2GRAY)
 
 		points_list_s = feature_detect(img_s_gray)
-		mask_s = extract_mask(points_list_s,img_s_gray)
+		points_list_t = feature_detect(img_t_gray)
 
 
+		masks_s = extract_mask(points_list_s,img_s_gray)
+		masks_t = extract_mask(points_list_t,img_t_gray)
+		mask_t = masks_t[0]
+
+		# points_s is [y,x] instead of [x,y]
+		H = estimate_homography(points_list_s,points_list_t,0,0)
+		swap_img = warp_face(img_s_gray,img_t_gray,mask_t,H)
 		count = count + 1
-
-
-
 
 
 
