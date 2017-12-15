@@ -37,5 +37,5 @@ def create_video(file_path_s, file_path_t ,len_frame,file_output_path):
 
 
 	cv2.destroyAllWindows()
-	vidcap.release()
-
+	vidcap_s.release()
+	vidcap_t.release()
