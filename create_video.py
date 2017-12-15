@@ -1,6 +1,5 @@
-
 from basic_packages import * 
-
+from functions import *
 '''
 input: 
 	file_path_s: the path of the mp4 file of source
@@ -23,8 +22,9 @@ def create_video(file_path_s, file_path_t ,len_frame,file_output_path):
 			break
 		img_s_gray = cv2.cvtColor(img_s, cv2.COLOR_BGR2GRAY)
 		img_t_gray = cv2.cvtColor(img_t, cv2.COLOR_BGR2GRAY)
-		pdb.set_trace()
 
+		points_list_s = feature_detect(img_s_gray)
+		mask_s = extract_mask(points_list_s,img_s_gray)
 
 
 		count = count + 1
