@@ -10,13 +10,14 @@ import sys, os, math, scipy.misc, pdb, collections, random, imageio, cv2, dlib
 from PIL import Image
 from scipy.ndimage.filters import gaussian_filter
 from scipy.spatial import ConvexHull
+from scipy import interpolate
 from matplotlib.path import Path
 from numpy.linalg import inv
 
 sys.path.append('../Convolutional_Neural_Networks/')
 
 import PyNet as net
-
+from est_homography import est_homography
 
 
 # Reference: https://www.pyimagesearch.com/2017/04/03/facial-landmarks-dlib-opencv-python/
@@ -45,3 +46,25 @@ def rect_to_bb(rect):
  
 	# return a tuple of (x, y, w, h)
 	return (x, y, w, h)
+
+def est_homography(x, y, X, Y):
+  N = x.size
+  A = np.zeros([2 * N, 9])
+
+  i = 0
+  while i < N:
+    a = np.array([x[i], y[i], 1]).reshape(-1, 3)
+    c = np.array([[X[i]], [Y[i]]])
+    d = - c * a
+
+    A[2 * i, 0 : 3], A[2 * i + 1, 3 : 6]= a, a
+    A[2 * i : 2 * i + 2, 6 : ] = d
+
+    i += 1
+  
+  # compute the solution of A
+  U, s, V = np.linalg.svd(A, full_matrices=True)
+  h = V[8, :]
+  H = h.reshape(3, 3)
+
+  return H
