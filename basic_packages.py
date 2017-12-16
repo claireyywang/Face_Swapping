@@ -10,9 +10,11 @@ import sys, os, math, scipy.misc, pdb, collections, random, imageio, cv2, dlib
 from PIL import Image
 from scipy.ndimage.filters import gaussian_filter
 from scipy.spatial import ConvexHull
+from scipy.spatial import Delaunay
 from scipy import interpolate
 from matplotlib.path import Path
 from numpy.linalg import inv
+from tps import from_control_points
 
 sys.path.append('../Convolutional_Neural_Networks/')
 

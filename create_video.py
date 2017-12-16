@@ -13,6 +13,7 @@ def create_video(file_path_s, file_path_t ,len_frame,file_output_path):
 	vidcap_s = cv2.VideoCapture(file_path_s)
 	vidcap_t = cv2.VideoCapture(file_path_t)
 
+	visual_corresponding_point = False
 	count = 0
 	while (vidcap_s.isOpened() and vidcap_t.isOpened() and count < len_frame):
 		[success_s, img_s] = vidcap_s.read()
@@ -26,14 +27,32 @@ def create_video(file_path_s, file_path_t ,len_frame,file_output_path):
 		points_list_s = feature_detect(img_s_gray)
 		points_list_t = feature_detect(img_t_gray)
 
+		if(visual_corresponding_point):
+			# Visualize the shape
+			points_s = points_list_s[0]
+			points_t = points_list_t[0]
+
+			for j in range(26):
+				(x, y) = points_s[j]
+				cv2.circle(img_s, (x, y), 1, (255, 255, 0), -1)
+			cv2.imshow("Output_1", img_s)
+		
+			for j in range(26):
+				(x, y) = points_t[j]
+				cv2.circle(img_t, (x, y), 1, (255, 255, 0), -1)
+			cv2.imshow("Output_2", img_t)
+
+
 
 		masks_s = extract_mask(points_list_s,img_s_gray)
 		masks_t = extract_mask(points_list_t,img_t_gray)
 		mask_t = masks_t[0]
 
-		# points_s is [y,x] instead of [x,y]
-		H = estimate_homography(points_list_s,points_list_t,0,0)
-		swap_img = warp_face(img_s_gray,img_t_gray,mask_t,H)
+		# From testing, take the first points_s in list as feature points 
+		points_s = points_list_s[0]
+		points_t = points_list_t[0]
+
+		swap_img = warp_face(img_s_gray,img_t_gray,mask_t,points_s,points_t)
 		count = count + 1
 
 

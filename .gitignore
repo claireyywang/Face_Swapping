@@ -1,2 +1,4 @@
 # Overlook dlib folder
 dlib
+
+*.pyc

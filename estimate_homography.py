@@ -7,12 +7,29 @@ input:
 
 output:
 	H: the homography transformation transform from idx_s to idx_t
+
+reference https://github.com/olt/thinplatespline
 '''
 
 from basic_packages import *
 
-def estimate_homography(points_list_s,points_list_t,idx_s,idx_t):
-	points_s = points_list_s[idx_s]
-	points_t = points_list_t[idx_t]
-	H = est_homography(points_s[0:26,0],points_s[0:26,1], points_t[0:26,0], points_t[0:26,1])
-	return H
+def estimate_homography(points_s,points_t,pix_i,pix_j):
+
+	# idx = np.asarray([6,12,18,27])
+	tri_s = Delaunay(points_s)
+	tri_t = Delaunay(points_t)
+	num_tri = tri_s.find_simplex(np.transpose(np.asarray([pix_i,pix_j])))
+	vertice_s = tri_s.simplices[num_tri]
+	vertice_t = tri_t.simplices[num_tri]
+
+	tri_pts_s = points_s[vertice_s]
+	tri_pts_t = points_t[vertice_t]
+	
+	H_s = []
+	for ptr_s,ptr_t in zip(tri_pts_s,tri_pts_t):
+		H = cv2.getAffineTransform(np.float32(ptr_s), np.float32(ptr_t))
+		H_s.append(H)
+		pdb.set_trace()
+	# H, mask = cv2.findHomography(points_s[idx,:], points_t[idx,:], cv2.RANSAC,5.0)
+	# H = est_homography(points_s[idx,0],points_s[idx,1], points_t[idx,0], points_t[idx,1])
+	return H_s
