@@ -13,12 +13,13 @@ reference https://github.com/olt/thinplatespline
 
 from basic_packages import *
 
-def estimate_homography(points_s,points_t,pix_i,pix_j):
+def estimate_homography(points_s,points_t,pix_i,pix_j,img_s,img_t):
 
 	# idx = np.asarray([6,12,18,27])
 	tri_s = Delaunay(points_s)
 	tri_t = Delaunay(points_t)
 	num_tri = tri_s.find_simplex(np.transpose(np.asarray([pix_i,pix_j])))
+	pdb.set_trace()
 	vertice_s = tri_s.simplices[num_tri]
 	vertice_t = tri_t.simplices[num_tri]
 
@@ -29,7 +30,6 @@ def estimate_homography(points_s,points_t,pix_i,pix_j):
 	for ptr_s,ptr_t in zip(tri_pts_s,tri_pts_t):
 		H = cv2.getAffineTransform(np.float32(ptr_s), np.float32(ptr_t))
 		H_s.append(H)
-		pdb.set_trace()
 	# H, mask = cv2.findHomography(points_s[idx,:], points_t[idx,:], cv2.RANSAC,5.0)
 	# H = est_homography(points_s[idx,0],points_s[idx,1], points_t[idx,0], points_t[idx,1])
 	return H_s
