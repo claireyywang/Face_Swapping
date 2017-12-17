@@ -19,8 +19,11 @@ from tps import from_control_points
 sys.path.append('../Convolutional_Neural_Networks/')
 
 import PyNet as net
-from est_homography import est_homography
 
+
+def show_img(img):
+	plt.imshow(np.uint8(img))
+	plt.show()
 
 # Reference: https://www.pyimagesearch.com/2017/04/03/facial-landmarks-dlib-opencv-python/
 # face_utils functions
