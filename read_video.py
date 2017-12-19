@@ -12,6 +12,7 @@ def read_video(video_path):
   	print('Read a new frame: ', success)
   	img_queue.append(image)
   	count += 1
+  cap.release()
   return img_queue
 
 if __name__ == '__main__':

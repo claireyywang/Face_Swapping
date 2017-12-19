@@ -11,8 +11,8 @@ def extract_mask(img, feature_points):
     cv2.fillConvexPoly(mask, mask_region, color=1)
     
   mask = np.array([mask, mask, mask]).transpose((1, 2, 0))
-  #mask = (cv2.GaussianBlur(mask, (11, 11), 0) > 0) * 1.0
-  #mask = cv2.GaussianBlur(mask, (11, 11), 0)
+  mask = (cv2.GaussianBlur(mask, (11, 11), 0) > 0) * 1.0
+  mask = cv2.GaussianBlur(mask, (11, 11), 0)
   #import pdb; pdb.set_trace()
   #cv2.imwrite('mask.jpg', mask)
   return mask
