@@ -1,9 +1,11 @@
 from packages import * 
-from align_feature import *
+
+# eyebrows, eyes, nose and mouth to create feature mask
+OVERLAY_REGIONS = [list(range(22, 27))+list(range(17, 22))+list(range(42, 48))+list(range(36, 42)), list(range(27, 35))+list(range(48, 61))]
 
 def extract_mask(img, feature_points):
   #initialize mask based on source image size
-  mask = np.zeros(img.shape[:2], dtype=np.float64)
+  mask = np.zeros(img.shape[:2])
   for region in OVERLAY_REGIONS:
     mask_region = cv2.convexHull(feature_points[region])
     cv2.fillConvexPoly(mask, mask_region, color=1)

@@ -1,5 +1,4 @@
 from packages import *
-from align_feature import * 
 
 def est_affine_transform(source_pts, target_pts):
   source_pts = source_pts.astype(np.float64)
