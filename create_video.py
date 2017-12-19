@@ -1,41 +1,32 @@
+from packages import *
+from functions import * 
 
-from basic_packages import * 
+def create_video(file_path_s, file_path_t):
+  s_video_queue = read_video(file_path_s)
+  t_video_queue = read_video(file_path_t)
 
-'''
-input: 
-	file_path_s: the path of the mp4 file of source
-	file_path_t: the path of the mp4 file of target
-	len_frame: int
-	file_output_path: the path of output video
-'''
+  img_s = np.array(s_video_queue[0])
+  img_t = np.array(t_video_queue[0])
 
-def create_video(file_path_s, file_path_t ,len_frame,file_output_path):
+  h_s , w_s , l_s =  img_s.shape
+  fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+  #video_s = cv2.VideoWriter(output_path_s,fourcc,20,(w_s,h_s),True)
 
-	vidcap_s = cv2.VideoCapture(file_path_s)
-	vidcap_t = cv2.VideoCapture(file_path_t)
+  h_t , w_t , l_t =  img_t.shape
+  fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+  #video_t = cv2.VideoWriter(output_path_t,fourcc,20,(w_t,h_t),True)
 
-	count = 0
-	while (vidcap_s.isOpened() and vidcap_t.isOpened() and count < len_frame):
-		[success_s, img_s] = vidcap_s.read()
-		[success_t, img_t] = vidcap_t.read()
+  s_features = feature_detect(img_s)
+  t_features = feature_detect(img_t)
+  
+  #align_feature(s_landmarks[ALIGNMENT_REGIONS],t_landmarks2[ALIGNMENT_REGIONS])
 
-		if(not success_s or not success_t):
-			break
-		img_s_gray = cv2.cvtColor(img_s, cv2.COLOR_BGR2GRAY)
-		img_t_gray = cv2.cvtColor(img_t, cv2.COLOR_BGR2GRAY)
-		pdb.set_trace()
+if __name__ == '__main__':
+  input_path_s = 'Input_Videos/Easy/FrankUnderwood.mp4'
+  input_path_t = 'Input_Videos/Easy/MrRobot.mp4'
 
+  len_frame = 200
+  output_path_s = 'output_video/swap_s.avi' 
+  output_path_t = 'output_video/swap_t.avi' 
 
-
-		count = count + 1
-
-
-
-
-
-
-
-
-	cv2.destroyAllWindows()
-	vidcap.release()
-
+  create_video(input_path_s,input_path_t)
