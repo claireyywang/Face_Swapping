@@ -9,4 +9,5 @@ from scipy.spatial import Delaunay
 from scipy import interpolate
 from matplotlib.path import Path
 from numpy.linalg import inv
-#from tps import from_control_points
+from skimage import io 
+from sklearn.externals import joblib
